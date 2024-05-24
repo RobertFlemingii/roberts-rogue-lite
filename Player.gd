@@ -1,9 +1,12 @@
 extends KinematicBody2D
 
+signal player_fired_bullet(bullet, position, direction)
+
 export (PackedScene) var Bullet
 export (int) var speed = 100
 
 onready var end_of_gun = $EndOfGun
+onready var gun_direction = $GunDirection
 
 func _ready() -> void:
 	pass
@@ -31,8 +34,5 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func shoot ():
 	var bullet_instance = Bullet.instance()
-	add_child(bullet_instance)
-	bullet_instance.global_position = end_of_gun.global_position
-	var target = get_global_mouse_position()
-	var direction_to_mouse = bullet_instance.global_position.direction_to(target).normalized()
-	bullet_instance.set_direction(direction_to_mouse)
+	var direction = (gun_direction.global_position - end_of_gun.global_position).normalized()
+	emit_signal("player_fired_bullet", bullet_instance, end_of_gun.global_position, direction)

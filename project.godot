@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://Bullet.gd"
+}, {
 "base": "Node",
 "class": "Walker",
 "language": "GDScript",
 "path": "res://Walker.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
 "Walker": ""
 }
 
